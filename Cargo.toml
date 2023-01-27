@@ -1,0 +1,12 @@
+[package]
+name = "ed"
+version = "0.1.0"
+edition = "2021"
+authors = ["fawn <fawn@envs.net>"]
+repository = "https://github.com/fawni/ed"
+license = "ISC"
+
+[dependencies]
+# clap = "4.1"
+owo-colors = "3.5"
+dialoguer = "0.10"
