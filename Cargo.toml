@@ -10,3 +10,4 @@ license = "ISC"
 # clap = "4.1"
 owo-colors = "3.5"
 dialoguer = "0.10"
+strum = { version = "0.24", features = ["derive"] }
