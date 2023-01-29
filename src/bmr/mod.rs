@@ -1,3 +1,5 @@
+use std::fmt::{Display, Formatter};
+
 pub mod cunningham;
 pub mod harris_benedict;
 pub mod katch_mcardle;
@@ -19,8 +21,8 @@ impl From<usize> for Sex {
     }
 }
 
-impl std::fmt::Display for Sex {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+impl Display for Sex {
+    fn fmt(&self, f: &mut Formatter) -> std::fmt::Result {
         match *self {
             Self::Male => write!(f, "Male"),
             Self::Female => write!(f, "Female"),

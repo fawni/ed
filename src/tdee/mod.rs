@@ -18,7 +18,7 @@ pub enum ActivityLevel {
 impl Display for ActivityLevel {
     fn fmt(&self, f: &mut Formatter) -> std::fmt::Result {
         match *self {
-            Self::Paralyzed => write!(f, "Completely Paralyzed (1.0)",),
+            Self::Paralyzed => write!(f, "Completely Paralyzed (1.0)"),
             Self::Immobile => write!(f, "Immobile (1.05)"),
             Self::Constricted => write!(f, "Constricted Lifestyle (1.1)"),
             Self::Little => write!(f, "No Exercise, Little Movement (1.16)"),
