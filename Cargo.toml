@@ -7,7 +7,6 @@ repository = "https://github.com/fawni/ed"
 license = "ISC"
 
 [dependencies]
-# clap = "4.1"
+clap = "4.1"
 owo-colors = "3.5"
 dialoguer = "0.10"
-strum = { version = "0.24", features = ["derive"] }

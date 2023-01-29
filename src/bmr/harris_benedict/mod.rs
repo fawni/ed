@@ -1,6 +1,6 @@
 pub mod revised;
 
-use super::Sex;
+use crate::Sex;
 
 pub fn calculate(weight: f32, height: f32, age: f32, sex: Sex) -> f32 {
     match sex {
