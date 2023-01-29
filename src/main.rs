@@ -68,7 +68,7 @@ fn calculate_bmr() -> Result<(), Box<dyn std::error::Error>> {
             .interact()?,
     );
     let _bf: f32 = Input::with_theme(&ColorfulTheme::default())
-        .with_prompt("What is your bodyfat%? (optional)")
+        .with_prompt("What is your body fat %? (optional)")
         .allow_empty(true)
         .show_default(false)
         .default(0.0)

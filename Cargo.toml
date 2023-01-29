@@ -10,3 +10,8 @@ license = "ISC"
 clap = "4.1"
 owo-colors = "3.5"
 dialoguer = "0.10"
+
+[profile.release]
+lto = true
+strip = true
+codegen-units = 1
