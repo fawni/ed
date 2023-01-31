@@ -34,51 +34,19 @@ impl Display for Sex {
 mod tests {
     use super::*;
 
-    #[test]
-    fn harris_benedict() {
-        assert_eq!(
-            format!(
-                "{:.0}",
-                harris_benedict::calculate(46.0, 178.0, 19.0, Sex::Male)
-            ),
-            "1461"
-        );
-
-        assert_eq!(
-            format!(
-                "{:.0}",
-                harris_benedict::revised::calculate(53.5, 188.0, 19.0, Sex::Female)
-            ),
-            "1442"
-        );
+    macro_rules! t {
+        ($t:ident: $p:expr => $r:expr) => {
+            #[test]
+            fn $t() {
+                assert_eq!(format!("{:.0}", $p), $r.to_string())
+            }
+        };
     }
 
-    #[test]
-    fn mifflin_st_jeor() {
-        assert_eq!(
-            format!(
-                "{:.0}",
-                mifflin_st_jeor::calculate(62.0, 183.0, 22.0, Sex::Female)
-            ),
-            "1493"
-        );
-    }
-
-    #[test]
-    fn cunningham() {
-        assert_eq!(format!("{:.0}", cunningham::calculate(47.0, 10.0)), "1431");
-    }
-
-    #[test]
-    fn katch_mcardle() {
-        assert_eq!(
-            format!("{:.0}", katch_mcardle::calculate(51.5, 12.0)),
-            "1349"
-        );
-
-        assert_eq!(
-            format!("{:.0}", katch_mcardle::hyprid::calculate(58.5, 13.5)),
-            "1462"
-        );
-    }
+    t!(harris_benedict: harris_benedict::calculate(46.0, 178.0, 19.0, Sex::Male) => 1461);
+    t!(harris_benedict_revised: harris_benedict::revised::calculate(53.5, 188.0, 19.0, Sex::Female) => 1442);
+    t!(mifflin_st_jeor: mifflin_st_jeor::calculate(62.0, 183.0, 22.0, Sex::Female) => 1493);
+    t!(cunningham: cunningham::calculate(47.0, 10.0) => 1431);
+    t!(katch_mcardle: katch_mcardle::calculate(51.5, 12.0) => 1349);
+    t!(katch_mcardle_hyprid: katch_mcardle::hyprid::calculate(58.5, 13.5) => 1462);
 }

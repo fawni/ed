@@ -79,17 +79,14 @@ mod tests {
 
     use super::*;
 
-    #[test]
-    fn tdee() {
-        assert_eq!(
-            format!(
-                "{:.0}",
-                calculate(
-                    bmr::katch_mcardle::calculate(47.0, 10.0),
-                    ActivityLevel::Sedentary,
-                )
-            ),
-            "1540"
-        );
+    macro_rules! t {
+        ($t:ident: $p1:expr, $p2:expr => $r:expr) => {
+            #[test]
+            fn $t() {
+                assert_eq!(format!("{:.0}", calculate($p1, $p2)), $r.to_string())
+            }
+        };
     }
+
+    t!(sedentary: bmr::katch_mcardle::calculate(47.0, 10.0), ActivityLevel::Sedentary => 1540);
 }

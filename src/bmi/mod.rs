@@ -10,18 +10,16 @@ pub fn calculate(weight: f32, height_cm: f32) -> f32 {
 mod tests {
     use super::*;
 
-    #[test]
-    fn bmi() {
-        assert_eq!(format!("{:.1}", calculate(55.0, 185.0)), "16.1");
+    macro_rules! t {
+        ($t:ident: $p:expr => $r:expr) => {
+            #[test]
+            fn $t() {
+                assert_eq!(format!("{:.1}", $p), $r.to_string())
+            }
+        };
     }
 
-    #[test]
-    fn new_bmi() {
-        assert_eq!(format!("{:.1}", new::calculate(50.0, 172.0)), "16.8");
-    }
-
-    #[test]
-    fn prime_bmi() {
-        assert_eq!(format!("{:.1}", prime::calculate(39.0, 164.0)), "0.7");
-    }
+    t!(bmi: calculate(55.0, 185.0) => 16.1);
+    t!(new_bmi: new::calculate(50.0, 172.0) => 16.8);
+    t!(prime_bmi: prime::calculate(39.0, 164.0) => 0.7);
 }
