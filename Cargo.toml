@@ -1,13 +1,13 @@
 [package]
 name = "ed"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["fawn <fawn@envs.net>"]
 repository = "https://github.com/fawni/ed"
 license = "ISC"
 
 [dependencies]
-clap = "4.1"
+clap = { version = "4.1", features = ["cargo"] }
 owo-colors = "3.5"
 dialoguer = "0.10"
 
