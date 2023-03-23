@@ -7,9 +7,9 @@ repository = "https://github.com/fawni/ed"
 license = "ISC"
 
 [dependencies]
-clap = { version = "4.1", features = ["cargo"] }
-owo-colors = "3.5"
-dialoguer = "0.10"
+clap = { version = "4.1.11", features = ["cargo"] }
+owo-colors = "3.5.0"
+dialoguer = "0.10.3"
 
 [profile.release]
 lto = true
