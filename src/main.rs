@@ -9,7 +9,7 @@ mod bmr;
 mod tdee;
 
 mod args;
-mod macros;
+mod log;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     match args::get_app().get_matches().subcommand() {
@@ -108,9 +108,10 @@ fn calculate_tdee() -> Result<(), Box<dyn std::error::Error>> {
     let age: f32 = Input::with_theme(&ColorfulTheme::default())
         .with_prompt("What is your age?")
         .validate_with(|a: &f32| -> Result<(), &str> {
-            match a <= &125.0 {
-                true => Ok(()),
-                false => Err("Age must be less than or equal to 125"),
+            if a <= &125.0 {
+                Ok(())
+            } else {
+                Err("Age must be less than or equal to 125")
             }
         })
         .interact_text()?;
@@ -120,13 +121,13 @@ fn calculate_tdee() -> Result<(), Box<dyn std::error::Error>> {
             .items(&[Sex::Male, Sex::Female])
             .interact()?,
     );
-    let _bf: f32 = Input::with_theme(&ColorfulTheme::default())
+    let bf_: f32 = Input::with_theme(&ColorfulTheme::default())
         .with_prompt("What is your body fat %? (optional)")
         .allow_empty(true)
         .show_default(false)
         .default(0.0)
         .interact_text()?;
-    let bodyfat = if _bf == 0.0 { None } else { Some(_bf) };
+    let bodyfat = if bf_ == 0.0 { None } else { Some(bf_) };
     let activity_level = ActivityLevel::from(
         Select::with_theme(&ColorfulTheme::default())
             .with_prompt("What is your activity level?")
