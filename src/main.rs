@@ -1,5 +1,4 @@
 use dialoguer::{theme::ColorfulTheme, Input, Select};
-use owo_colors::OwoColorize;
 
 use bmr::Sex;
 use tdee::ActivityLevel;
@@ -9,18 +8,16 @@ mod bmr;
 mod tdee;
 
 mod args;
-mod log;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     match args::get_app().get_matches().subcommand() {
         Some(("bmi", _)) => calculate_bmi(),
         Some(("bmr", _)) => calculate_bmr(),
         Some(("tdee", _)) => calculate_tdee(),
-        None => {
+        _ => {
             args::get_app().print_help()?;
             Ok(())
         }
-        _ => unreachable!(),
     }
 }
 
@@ -36,11 +33,11 @@ fn calculate_bmi() -> Result<(), Box<dyn std::error::Error>> {
     let new = bmi::new::calculate(weight, height_cm);
     let prime = bmi::prime::calculate(weight, height_cm);
 
-    println!("{}", "---".green());
+    println!("\x1b[32m---\x1b[0m");
 
-    info!("BMI: {bmi:.1}");
-    info!("New BMI: {new:.1}");
-    info!("BMI Prime: {prime:.1}");
+    twink::info!("BMI: {bmi:.1}");
+    twink::info!("New BMI: {new:.1}");
+    twink::info!("BMI Prime: {prime:.1}");
 
     Ok(())
 }
@@ -79,20 +76,20 @@ fn calculate_bmr() -> Result<(), Box<dyn std::error::Error>> {
     let harris_revised = bmr::harris_benedict::revised::calculate(weight, height, age, sex);
     let mifflin = bmr::mifflin_st_jeor::calculate(weight, height, age, sex);
 
-    println!("{}", "---".green());
+    println!("\x1b[32m---\x1b[0m");
 
-    info!("Harris-Benedict (Original): {harris:.0}");
-    info!("Harris-Benedict (Revised): {harris_revised:.0}");
-    info!("Mifflin St Jeor: {mifflin:.0}");
+    twink::info!("Harris-Benedict (Original): {harris:.0}");
+    twink::info!("Harris-Benedict (Revised): {harris_revised:.0}");
+    twink::info!("Mifflin St Jeor: {mifflin:.0}");
 
     if let Some(bf) = bodyfat {
         let katch = bmr::katch_mcardle::calculate(weight, bf);
         let katch_hyprid = bmr::katch_mcardle::hyprid::calculate(weight, bf);
         let cunningham = bmr::cunningham::calculate(weight, bf);
 
-        info!("Katch-McArdle: {katch:.0}");
-        info!("Katch-McArdle (Hyprid): {katch_hyprid:.0}");
-        info!("Cunningham: {cunningham:.0}");
+        twink::info!("Katch-McArdle: {katch:.0}");
+        twink::info!("Katch-McArdle (Hyprid): {katch_hyprid:.0}");
+        twink::info!("Cunningham: {cunningham:.0}");
     }
 
     Ok(())
@@ -160,11 +157,11 @@ fn calculate_tdee() -> Result<(), Box<dyn std::error::Error>> {
         activity_level,
     );
 
-    println!("{}", "---".green());
+    println!("\x1b[32m---\x1b[0m");
 
-    info!("Harris-Benedict (Original): {harris:.0}");
-    info!("Harris-Benedict (Revised): {harris_revised:.0}");
-    info!("Mifflin St Jeor: {mifflin:.0}");
+    twink::info!("Harris-Benedict (Original): {harris:.0}");
+    twink::info!("Harris-Benedict (Revised): {harris_revised:.0}");
+    twink::info!("Mifflin St Jeor: {mifflin:.0}");
 
     if let Some(bf) = bodyfat {
         let katch = tdee::calculate(bmr::katch_mcardle::calculate(weight, bf), activity_level);
@@ -174,9 +171,9 @@ fn calculate_tdee() -> Result<(), Box<dyn std::error::Error>> {
         );
         let cunningham = tdee::calculate(bmr::cunningham::calculate(weight, bf), activity_level);
 
-        info!("Katch-McArdle: {katch:.0}");
-        info!("Katch-McArdle (Hyprid): {katch_hyprid:.0}");
-        info!("Cunningham: {cunningham:.0}");
+        twink::info!("Katch-McArdle: {katch:.0}");
+        twink::info!("Katch-McArdle (Hyprid): {katch_hyprid:.0}");
+        twink::info!("Cunningham: {cunningham:.0}");
     }
 
     Ok(())
