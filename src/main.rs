@@ -35,9 +35,9 @@ fn calculate_bmi() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("\x1b[32m---\x1b[0m");
 
-    twink::info!("BMI: {bmi:.1}");
-    twink::info!("New BMI: {new:.1}");
-    twink::info!("BMI Prime: {prime:.1}");
+    twink::purr!("BMI: {:.1}", bmi);
+    twink::purr!("New BMI: {:.1}", new);
+    twink::purr!("BMI Prime: {:.1}", prime);
 
     Ok(())
 }
@@ -78,18 +78,18 @@ fn calculate_bmr() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("\x1b[32m---\x1b[0m");
 
-    twink::info!("Harris-Benedict (Original): {harris:.0}");
-    twink::info!("Harris-Benedict (Revised): {harris_revised:.0}");
-    twink::info!("Mifflin St Jeor: {mifflin:.0}");
+    twink::purr!("Harris-Benedict (Original): {:.0}", harris);
+    twink::purr!("Harris-Benedict (Revised): {:.0}", harris_revised);
+    twink::purr!("Mifflin St Jeor: {:.0}", mifflin);
 
     if let Some(bf) = bodyfat {
         let katch = bmr::katch_mcardle::calculate(weight, bf);
         let katch_hyprid = bmr::katch_mcardle::hyprid::calculate(weight, bf);
         let cunningham = bmr::cunningham::calculate(weight, bf);
 
-        twink::info!("Katch-McArdle: {katch:.0}");
-        twink::info!("Katch-McArdle (Hyprid): {katch_hyprid:.0}");
-        twink::info!("Cunningham: {cunningham:.0}");
+        twink::purr!("Katch-McArdle: {:.0}", katch);
+        twink::purr!("Katch-McArdle (Hyprid): {:.0}", katch_hyprid);
+        twink::purr!("Cunningham: {:.0}", cunningham);
     }
 
     Ok(())
@@ -159,9 +159,9 @@ fn calculate_tdee() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("\x1b[32m---\x1b[0m");
 
-    twink::info!("Harris-Benedict (Original): {harris:.0}");
-    twink::info!("Harris-Benedict (Revised): {harris_revised:.0}");
-    twink::info!("Mifflin St Jeor: {mifflin:.0}");
+    twink::purr!("Harris-Benedict (Original): {:.0}", harris);
+    twink::purr!("Harris-Benedict (Revised): {:.0}", harris_revised);
+    twink::purr!("Mifflin St Jeor: {:.0}", mifflin);
 
     if let Some(bf) = bodyfat {
         let katch = tdee::calculate(bmr::katch_mcardle::calculate(weight, bf), activity_level);
@@ -171,9 +171,9 @@ fn calculate_tdee() -> Result<(), Box<dyn std::error::Error>> {
         );
         let cunningham = tdee::calculate(bmr::cunningham::calculate(weight, bf), activity_level);
 
-        twink::info!("Katch-McArdle: {katch:.0}");
-        twink::info!("Katch-McArdle (Hyprid): {katch_hyprid:.0}");
-        twink::info!("Cunningham: {cunningham:.0}");
+        twink::purr!("Katch-McArdle: {:.0}", katch);
+        twink::purr!("Katch-McArdle (Hyprid): {:.0}", katch_hyprid);
+        twink::purr!("Cunningham: {:.0}", cunningham);
     }
 
     Ok(())
